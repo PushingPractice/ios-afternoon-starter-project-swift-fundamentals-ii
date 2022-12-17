@@ -52,7 +52,24 @@ class DepatureBoard {
         departureFlights.append(flight)
     }
     
-   
+    func alertPassengers() {
+        for flight in departureFlights {
+            if flight.terminal == nil {
+                print("TBD")
+            } else {
+                switch flight.flightStatus {
+                case .scheduled:
+                    print("Your flight is scheduled to depart at \(flight.date ?? makeDate(year: 2022, month: 4, day: 5, hr: 4, min: 5, sec: 4)) from terminal: \(flight.terminal ?? "TBD")")
+                case .enRoute:
+                   print( "Your flight is boarding, please head to terminal: (terminal) immediately. The doors are closing soon.")
+                case .canceled:
+                   print( "We're sorry your flight to (city) was canceled, here is a $500 voucher")
+                case .delayed:
+                   print( "Sorry for the delay. Your flight will soon be updated!")
+                }
+            }
+        }
+    }
 }
 
 
@@ -145,8 +162,8 @@ func makeDate(year: Int, month: Int, day: Int, hr: Int, min: Int, sec: Int) -> D
 //: d. Call the `alertPassengers()` function on your `DepartureBoard` object below
 //:
 //: f. Stretch: Display a custom message if the `terminal` is `nil`, tell the traveler to see the nearest information desk for more details.
-
-
+depatureBoard.departureFlights[0].flightStatus = .delayed
+depatureBoard.alertPassengers()
 
 
 //: ## 6. Create a free-standing function to calculate your total airfair for checked bags and destination
